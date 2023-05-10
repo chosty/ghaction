@@ -6,6 +6,9 @@ on:
       - closed
     branches:
       - 'feature/**'
+  push:
+    branches:
+      - dev
 
 jobs:
   create_pr:
