@@ -1,0 +1,30 @@
+name: Create PR to Staging and Main
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'feature/**'
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref =~ '^feature/'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create PR to Staging
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: "stg"
+          branch: ${{ github.event.pull_request.head.ref }}
+
+      - name: Create PR to Main
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: "main"
+          branch: ${{ github.event.pull_request.head.ref }}
