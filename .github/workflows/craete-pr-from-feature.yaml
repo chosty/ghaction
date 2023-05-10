@@ -13,7 +13,7 @@ on:
 jobs:
   create_pr:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref =~ '^feature\/.*'
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
