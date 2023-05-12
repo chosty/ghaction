@@ -5,15 +5,12 @@ on:
     types:
       - closed
     branches:
-      - 'feature/**'
-  push:
-    branches:
       - dev
 
 jobs:
   create_pr:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'feature/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,11 +20,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "stg"
-          branch: ${{ github.event.pull_request.head.ref }}
+          branch: ${{ github.head_ref }}
 
       - name: Create PR to Main
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "main"
-          branch: ${{ github.event.pull_request.head.ref }}
+          branch: ${{ github.head_ref }}
