@@ -2,5 +2,5 @@
 
 ## 必要なアクション整理
 
-- [x] feature/hogeブランチがdevにmergeされた時、feature/hogeブランチからstg、 main(prd)へのPRを作成する
-- [ ] main(prd)にmergeされた時(mainが更新された時)、mainをdev, stgにmergeするためのPRを作成する
+- feature/hogeブランチがdevにmergeされた時、stg、 main(prd)へのPRを作成する
+- main(prd)にmergeされた時(mainが更新された時)、mainをdev, stgにmergeするためのPRを作成する
