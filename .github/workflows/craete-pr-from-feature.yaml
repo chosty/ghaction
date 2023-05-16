@@ -20,11 +20,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "stg"
-          branch: ${{ github.head_ref }}
+          branch: "${{ github.head_ref }}-to-stg"
 
       - name: Create PR to Main
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "main"
-          branch: ${{ github.head_ref }}
+          branch: "${{ github.head_ref }}-to-main"
