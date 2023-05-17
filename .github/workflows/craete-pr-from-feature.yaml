@@ -14,17 +14,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+          with:
+            ref: ${{ github.head_ref }}
+
+      - name: Git Pull Origin
+        run: |
+          git pull origin ${{ github.head_ref }}
 
       - name: Create PR to Staging
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "stg"
-          branch: "${{ github.head_ref }}-to-stg"
+          branch: ${{ github.head_ref }}
 
       - name: Create PR to Main
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "main"
-          branch: "${{ github.head_ref }}-to-main"
+          branch: ${{ github.head_ref }}
